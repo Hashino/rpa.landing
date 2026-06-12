@@ -1,5 +1,31 @@
 # Soluções RPA — Landing Page
 
+## ⏳ PENDENTE: configurar DNS no registro.br
+
+O painel estava bloqueado com "Domínio em transição" (12/06/2026). Quando liberar, fazer:
+
+1. Entrar em [registro.br/painel](https://registro.br/painel/) e clicar no domínio **solucoesrpa.com.br**.
+2. No quadro **DNS**, clicar em **"Configurar endereçamento"** (não existe botão "Editar Zona" — é esse o nome).
+3. Mudar para o **Modo avançado** (o CNAME só aparece nele).
+4. Criar as 5 entradas:
+
+   | Nome | Tipo | Dados |
+   |------|------|-------|
+   | *(vazio)* | A | 185.199.108.153 |
+   | *(vazio)* | A | 185.199.109.153 |
+   | *(vazio)* | A | 185.199.110.153 |
+   | *(vazio)* | A | 185.199.111.153 |
+   | www | CNAME | hashino.github.io. |
+
+   O campo "Nome" vazio = raiz do domínio. No CNAME, manter o ponto final em `hashino.github.io.` se o painel aceitar.
+
+5. Salvar e aguardar a propagação (minutos até algumas horas).
+6. Depois que propagar, ir em [Settings → Pages do repositório](https://github.com/Hashino/rpa.landing/settings/pages), conferir que o **Custom domain** `solucoesrpa.com.br` está verificado (já foi salvo — o arquivo `CNAME` existe no repositório) e marcar **Enforce HTTPS**.
+
+Se aparecer "Domínio em transição" de novo, é bloqueio temporário do registro.br — esperar 10–30 min e tentar novamente.
+
+---
+
 Landing page estática (HTML + CSS + JS puro), sem back-end e sem build. Basta hospedar os 3 arquivos:
 
 - `index.html`
